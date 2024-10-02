@@ -1,0 +1,27 @@
+Purpose: Create a sorting algorithm for spotify playlists offering multiple levels of sorting.
+         For example, being able to first sort by album, then sort the albums by date added.
+         Uses imported CSV files. CSV files can be created using exportify (from github repo or website).
+
+Driver:
+    - Will contain main.
+    - Main will run the various classes and display a menu of available files
+    - Main will display a menu allowing sorting criteria to be selected [we may limit # of criteria per sort]
+    - Criteria can be dynamically displayed based on names of columns in the CSV file
+    - Available files will be pulled from Storage/Playlists/
+    - Sorted files will be placed in Storage/SortedPlaylists/
+
+Sorter:
+    - Handles sorting by pulling from a playlist linked list then pushing to a separate playlist linked list object.
+    - Receives criteria from main.
+
+Playlist:
+    - Holds all of the songs and their metadata as a linked list
+    - Uses the metadata class for compatability, allowing it to hold any amount of various data types
+    - Holds metadata in an array or vector. Array size can be determined from the CSV file columns.
+
+Metadata:
+    - Templated class that holds various metadata types
+
+Smartpointer:
+    - Handles pointer stuff idk what a smart pointer is ngl
+

@@ -1,0 +1,3 @@
+/*
+    This header file is for the smart pointer class.
+*/

@@ -1,0 +1,3 @@
+/*
+    This header file will contain the template class for storing metadata within the playlists.
+*/

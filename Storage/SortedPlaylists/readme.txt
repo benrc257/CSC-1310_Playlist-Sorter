@@ -1,0 +1,1 @@
+This folder is for sorted playlists. The program will output here by default.

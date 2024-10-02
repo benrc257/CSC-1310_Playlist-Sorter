@@ -1,0 +1,3 @@
+/*
+    This file will contain the function definitions for the smart pointer class.
+*/
