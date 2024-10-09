@@ -25,18 +25,27 @@ metadataout := metadata.o
 smartout := smart.o
 objects := ${driverout} ${functionsout} ${sorterout} ${playlistout} ${metadataout} ${smartout}
 
-# compile output (All)
+# Detect OS for clean
+ifdef OS
+   RM = del -force
+else
+   ifeq ($(shell uname), Linux)
+      RM = rm -f
+   endif
+endif
+
+# Compile output (All)
 ${all}: ${objects}
 	${CXX} ${objects} -o ${output}
 
-# compile main
+# Compile main
 ${driverout}: ${driver}
 	${CXX} ${CXXFLAGS} ${driver} -o driver.o
 
 ${functionsout}: ${functions}
 	${CXX} ${CXXFLAGS} ${functions} -o functions.o
 
-# compile classes
+# Compile classes
 ${sorterout}: ${sorter}
 	${CXX} ${CXXFLAGS} ${sorter} -o sorter.o
 
@@ -49,14 +58,7 @@ ${metadataout}: ${metadata}
 ${smartout}: ${smart}
 	${CXX} ${CXXFLAGS} ${smart} -o smart.o
 
-# clean for windows
-
+# Make clean
 clean: ${objects} ${output}
-	del -force ${objects} ${output}
-	echo "Removed build files"
-
-# clean for all other platforms
-
-clean: ${objects} ${output}
-	rm -f ${objects} ${output}
+	${RM} ${objects} ${output}
 	echo "Removed build files"
