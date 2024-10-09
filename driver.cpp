@@ -5,3 +5,12 @@
 
     This file contains the main function.
 */
+
+#include "main.h"
+#include "Classes/sorter.h"
+
+int main() {
+
+
+    return 0;
+}
