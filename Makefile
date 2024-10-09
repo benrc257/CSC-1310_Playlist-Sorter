@@ -2,7 +2,7 @@
 # IF ON MAC OR LINUX, USE "make"
 
 # settings
-CXX = g++
+CXX = @g++
 CXXFLAGS = -c
 
 # file names
@@ -27,16 +27,18 @@ objects := ${driverout} ${functionsout} ${sorterout} ${playlistout} ${metadataou
 
 # Detect OS for clean
 ifdef OS
-   RM = del -force
+   RM = @del -force
 else
    ifeq ($(shell uname), Linux)
-      RM = rm -f
+      RM = @rm -f
    endif
 endif
 
 # Compile output (All)
 ${all}: ${objects}
 	${CXX} ${objects} -o ${output}
+	${RM} ${objects}
+	@echo "Output built successfully"
 
 # Compile main
 ${driverout}: ${driver}
@@ -58,7 +60,7 @@ ${metadataout}: ${metadata}
 ${smartout}: ${smart}
 	${CXX} ${CXXFLAGS} ${smart} -o smart.o
 
-# Make clean
-clean: ${objects} ${output}
+# Make clean (Removes files)
+clean:
 	${RM} ${objects} ${output}
-	echo "Removed build files"
+	@echo "Removed build files"
