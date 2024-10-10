@@ -2,7 +2,7 @@
 # IF ON MAC OR LINUX, USE "make"
 
 # settings
-CXX = @g++
+CXX = @g++ -std=c++2a
 CXXFLAGS = -c
 
 # file names
@@ -15,7 +15,7 @@ smart := Classes/smartpointer.cpp
 files := ${functions} ${driver} ${playlist} ${metadata} ${sorter} ${smart}
 
 # object names
-output := PlaylistSorter.exe
+output := PlaylistSorter
 all := all
 driverout := driver.o
 functionsout := functions.o
