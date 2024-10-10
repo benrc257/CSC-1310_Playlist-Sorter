@@ -4,3 +4,9 @@
 
 #include "main.h"
 #include "Classes/sorter.h"
+
+int printMenu(vector<string> files){
+
+
+
+}

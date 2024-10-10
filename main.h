@@ -13,11 +13,14 @@ using namespace std;
 #include <fstream>
 #include <filesystem>
 #include <vector>
-
+#include <ctime>
 
 // Global Constants
 const string StorageInput = "Storage/Playlists";
 const string StorageOutput = "Storage/SortedPlaylists";
 namespace fs = filesystem;
+
+// Driver Function Prototypes
+int printMenu(vector<string>);
 
 #endif
