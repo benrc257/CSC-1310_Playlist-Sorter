@@ -14,6 +14,7 @@ using namespace std;
 #include <filesystem>
 #include <vector>
 #include <ctime>
+#include <list>
 
 // Global Constants
 const string StorageInput = "Storage/Playlists";

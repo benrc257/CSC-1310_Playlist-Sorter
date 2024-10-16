@@ -11,8 +11,7 @@ driver := driver.cpp
 sorter := Classes/sorter.cpp
 playlist := Classes/playlist.cpp
 metadata := Classes/metadata.cpp
-smart := Classes/smartpointer.cpp
-files := ${functions} ${driver} ${playlist} ${metadata} ${sorter} ${smart}
+files := ${functions} ${driver} ${playlist} ${metadata} ${sorter}
 
 # object names
 output := PlaylistSorter
@@ -22,8 +21,7 @@ functionsout := functions.o
 sorterout := sorter.o
 playlistout := playlist.o
 metadataout := metadata.o
-smartout := smart.o
-objects := ${driverout} ${functionsout} ${sorterout} ${playlistout} ${metadataout} ${smartout}
+objects := ${driverout} ${functionsout} ${sorterout} ${playlistout} ${metadataout}
 
 # Detect OS for clean
 ifdef OS
@@ -42,23 +40,20 @@ ${all}: ${objects}
 
 # Compile main
 ${driverout}: ${driver}
-	${CXX} ${CXXFLAGS} ${driver} -o driver.o
+	${CXX} ${CXXFLAGS} ${driver} -o {driverout}
 
 ${functionsout}: ${functions}
-	${CXX} ${CXXFLAGS} ${functions} -o functions.o
+	${CXX} ${CXXFLAGS} ${functions} -o {functionsout}
 
 # Compile classes
 ${sorterout}: ${sorter}
-	${CXX} ${CXXFLAGS} ${sorter} -o sorter.o
+	${CXX} ${CXXFLAGS} ${sorter} -o {sorterout}
 
 ${playlistout}: ${playlist}
-	${CXX} ${CXXFLAGS} ${playlist} -o playlist.o
+	${CXX} ${CXXFLAGS} ${playlist} -o {playlistout}
 
 ${metadataout}: ${metadata}
-	${CXX} ${CXXFLAGS} ${sorter} -o metadata.o
-
-${smartout}: ${smart}
-	${CXX} ${CXXFLAGS} ${smart} -o smart.o
+	${CXX} ${CXXFLAGS} ${sorter} -o {metadataout}
 
 # Make clean (Removes files)
 clean:
