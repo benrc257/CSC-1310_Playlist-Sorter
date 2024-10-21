@@ -42,5 +42,8 @@ int main() {
 
     choice = printMenu(filenames);
 
+    /* When creating the playlist object, use a try + catch statement. Playlist is set to throw an error into main if the file opening fails or if the file is empty. 
+    Print this error to the screen then tell the user the file is empty or unable to be opened.*/
+
     return 0;
 }
