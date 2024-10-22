@@ -6,7 +6,6 @@
 #define SORTER_H
 
 #include "playlist.h"
-#include "smartpointer.h"
 #include "../main.h"
 
 #endif

@@ -30,54 +30,17 @@ class Playlist {
 
     public:
         int countColumns(string); //counts the number of commas in a string
+        void fillCells(string);
 
 
     //constructor
     Playlist(string path) {
-        string line;
-        size_t start, end;
-        ifstream file; //creates file variable and opens it to the file specified from main
-        file.open(path);
-
-        while (!file.eof()) { //counts the number of lines
-            getline(file, line);
-            this->rows++;
+        try { //checks for errors from fillCells
+            fillCells(path);
+        } catch(runtime_error err) { //passes possible errors into main
+            runtime_error(err.what());
         }
 
-
-        file.seekg(0); //resets the read position back to the start
-        file.clear();
-
-        if (file.is_open()) { //checks if file is open, otherwise throws error
-            getline(file, line);
-            this->columns = countColumns(line);
-            if (this->columns < 1) { //if columns is counted to be less than one, throws error
-                throw runtime_error("The selected file is empty!");
-            }
-
-        } else {
-            throw runtime_error("The selected file was unable to be opened!");
-        }
-
-        *this->cells = new string[this->rows]; //allocates rows
-
-        for (int i = 0; i < this->rows; i++) {
-            this->cells[i] = new string[this->columns]; //allocates columns
-        }        
-
-        for (int i = 0; i < this->rows; i++) {
-            getline(file, line); //reads in a line from the file
-            start = 0;
-            end = 0;
-
-            for (int j = 0; i < this->columns; j++) { //pushes the cells of the row into cells array
-                end = line.find(',');
-                this->cells[i][j] = line.substr(start, end-1);
-                start = end+1;
-            }
-        }
-
-        file.close();
     }
 
     //destructor
