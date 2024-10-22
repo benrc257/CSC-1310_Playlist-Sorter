@@ -31,6 +31,7 @@ class Playlist {
     public:
         int countColumns(string); //counts the number of commas in a string
         void fillCells(string);
+        void loadList();
 
 
     //constructor
@@ -38,8 +39,11 @@ class Playlist {
         try { //checks for errors from fillCells
             fillCells(path);
         } catch(runtime_error err) { //passes possible errors into main
-            runtime_error(err.what());
+           throw runtime_error(err.what());
         }
+
+        loadList();
+
 
     }
 
