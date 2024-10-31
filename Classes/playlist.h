@@ -13,17 +13,17 @@ const string track = "Track Name";
 const string album = "Album Name";
 const string artists = "Artist Name(s)";
 
+// Structure for holding song data
+struct Song {
+    int size;
+    Song *previous, *next;
+    Metadata<string> name, artist, album;
+};
 
 // Class for holding the playlist data
 class Playlist {
     private:
-        struct Song { //holds song data
-            Metadata<string> text;
-            Metadata<time_t> time;
-            Metadata<float> stats;
-        };
-
-        list<Song> songs;
+        Song* songs;
         string *filecontent;
         string **cells;
         int rows, columns;
@@ -32,19 +32,13 @@ class Playlist {
         int countColumns(string); //counts the number of commas in a string
         void fillCells(string);
         void loadList();
+        Song* getList();
 
 
     //constructor
     Playlist(string path) {
-        try { //checks for errors from fillCells
-            fillCells(path);
-        } catch(runtime_error err) { //passes possible errors into main
-           throw runtime_error(err.what());
-        }
-
-        loadList();
-
-
+        fillCells(path); //opens file and fills cells
+        loadList(); //loads cells into list
     }
 
     //destructor
@@ -53,6 +47,7 @@ class Playlist {
             delete [] cells[i];
         }
         delete [] cells; //deletes rows
+        delete [] songs; //deletes songs array
     }
 
 };

@@ -38,18 +38,8 @@ void Playlist::fillCells(string path) {
     file.seekg(0); //resets the read position back to the start
     file.clear();
 
-    if (file.is_open()) { //checks if file is open, otherwise throws error
-        getline(file, line);
-        this->columns = countColumns(line);
-        if (this->columns < 1) { //if columns is counted to be less than one, throws error
-            throw runtime_error("The selected file is empty!");
-            return;
-        }
-
-    } else {
-        throw runtime_error("The selected file was unable to be opened!");
-        return;
-    }
+    getline(file, line); //pulls first line from file
+    this->columns = countColumns(line);
 
     *this->cells = new string[this->rows]; //allocates rows
 
@@ -78,4 +68,34 @@ void Playlist::fillCells(string path) {
     }
 
     file.close();
+}
+
+void Playlist::loadList() {
+    
+    this->songs = new Song[this->rows];
+
+    for (int i = 0; i < this->rows; i++) {
+        (this->songs)[i].size = this->rows;
+        
+        if (i = 0) { //handles first index, sets the previous and next for head to NULL
+            (this->songs)[i].previous = NULL;
+            (this->songs)[i].next = NULL;
+        } else { //handles all other indexes, sets next to NULL, sets previous to previous song's memory address, and previous song's next to current songs address 
+           (this->songs)[i].previous = &(this->songs)[i-1];
+            (this->songs)[i].next = NULL;
+            (this->songs)[i-1].next = &(this->songs)[i];
+        }
+
+
+        //transfers data from the cells vector into the linked list
+        (this->songs)[i].artist.setData((this->cells)[i][4]);
+        (this->songs)[i].album.setData((this->cells)[i][3]);
+        (this->songs)[i].name.setData((this->cells)[i][2]);
+
+    }
+
+} 
+
+Song* Playlist::getList() {
+    return this->songs;
 }

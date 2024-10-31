@@ -34,16 +34,21 @@ int main() {
         cout << "Folder \"" << StorageInput << "\" was missing. Folder has been created. Returning...";
         return 0;
     }
-
+    
+    choice = printFileMenu(filenames);
+    
     if (choice == 0) {
         cout << "Folder \"" << StorageInput << "\" is empty. Returning...";
         return 0;
     }
 
-    choice = printMenu(filenames);
+    
 
     /* When creating the playlist object, use a try + catch statement. Playlist is set to throw an error into main if the file opening fails or if the file is empty. 
     Print this error to the screen then tell the user the file is empty or unable to be opened.*/
+
+
+
 
     return 0;
 }

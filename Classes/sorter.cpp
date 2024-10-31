@@ -3,3 +3,22 @@
 */
 
 #include "sorter.h"
+
+Song* Sorter::sort() {
+    
+    Song *target1, *target2;
+    
+    for (int i = 0; i < (*this->songs).size; i++) {
+        
+       if (target1->album.getData() < target2->album.getData())
+       {
+        /* code */
+       }
+       
+        
+
+    }
+    
+
+
+}
