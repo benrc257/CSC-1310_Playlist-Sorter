@@ -40,11 +40,8 @@ class Playlist {
 
     //constructor
     Playlist(string path) {
-        cout << "\nTEST playlist.h line 42 ----- constructor ---- start";
         fillCells(path); //opens file and fills cells
-        cout << "\nTEST playlist.h line 45 ----- constructor ----";
         loadList(); //loads cells into list
-        cout << "\nTEST playlist.h line 47 ----- constructor ----";
     }
 
     //destructor

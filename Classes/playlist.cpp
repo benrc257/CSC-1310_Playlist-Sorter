@@ -19,7 +19,6 @@ int Playlist::countColumns(string line) {
         start = end+1;
         count++;
     }
-    cout << "\n playlist.cpp :9 columns counted";
     return count;
 }
 
@@ -44,11 +43,9 @@ void Playlist::fillCells(string path) {
     this->columns = countColumns(line);
 
     this->cells = new string*[this->rows]; //allocates rows
-    cout << "\n playlist.cpp :48 first allocation successful";
     for (int i = 0; i < this->rows; i++) {
         this->cells[i] = new string[this->columns]; //allocates columns
-    }    
-    cout << "\n playlist.cpp :48 second allocation successful";    
+    }      
 
     for (int i = 0; i < this->rows; i++) {
         getline(file, line); //reads in a line from the file
@@ -71,7 +68,6 @@ void Playlist::fillCells(string path) {
     }
 
     file.close();
-    cout << "\n playlist.cpp :73 cells filled";
 }
 
 void Playlist::loadList() {
@@ -97,7 +93,6 @@ void Playlist::loadList() {
         (this->songs)[i].name.setData((this->cells)[i][1]);
 
     }
-    cout << "\n playlist.cpp :99 loaded list";
 } 
 
 Song* Playlist::getList() {

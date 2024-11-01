@@ -6,10 +6,8 @@
 
 Sorter::Sorter(int choice, string path)
 {
-    cout << "\nTEST sorter.cpp line 9 ----- constructor ---- start\n"; // delete
     this->outpath = path;
     this->playlist = new Playlist(path);
-    cout << "\nTEST sorter.cpp line 12 ----- constructor ----\n"; // delete
     if (choice >= 3) // decending
     {
         this->ascending = 0;
@@ -18,7 +16,6 @@ Sorter::Sorter(int choice, string path)
     };
     this->sortby = choice;
     this->songs = (*this->playlist).getList();
-    cout << "\nTEST sorter.cpp line 21 ----- constructor ----\n"; // delete
 };
 
 void Sorter::sort() {
@@ -100,8 +97,6 @@ void Sorter::sortSongsByArtist() {
 // bubble sort by name
 void Sorter::sortSongsByName() {
     int n = (this->songs)[0].size; // gets size of song arr
-    cout << "\nTEST sorter.cpp line 103 --- songs[0] = " << songs[0].album.getData(); // delete
-    cout << "\nTEST sorter.cpp line 104\n"; // delete
     for (int i = 0; i < n - 1; i++) { // bubble sort
         for (int j = 0; j < n - i - 1; j++) {
             // Compare the song names of consecutive songs
@@ -113,7 +108,6 @@ void Sorter::sortSongsByName() {
                     songs[j] = songs[j + 1];
                     songs[j + 1] = temp;
                 }
-                cout << "\nTEST sorter.cpp line 102 i = " << i << " j = " << j << " n = " << n; // delete
             } else { 
             
                 if (songs[j].name.getData() < songs[j + 1].name.getData()) { // Z-A

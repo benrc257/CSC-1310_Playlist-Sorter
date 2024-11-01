@@ -44,7 +44,6 @@ int main() {
     }
 
     sorter = new Sorter(sortMenu(), filenames.at(fileIndex-1));
-    cout << "\nTEST driver.cpp line 47 ----- constructor ----\n"; // delete
     sorter->sort();
     sorter->fileOutput();
     
@@ -52,6 +51,6 @@ int main() {
     
     delete sorter;
     
-    cout << "\nTEST driver.cpp line 55 ----- END ----\n"; // delete
+  
     return 0;
 }
