@@ -11,31 +11,33 @@
 class Sorter
 {
     private:
-        int sortby;
-        int accending;
-        Playlist* playlist;
-        Song* songs;
+        string outpath;
+        int sortby; // what to sort by
+        bool ascending; // true = ascending, false = descending
+        Playlist* playlist; // the playlist to sort
+        Song* songs; // songs in said playlist
     public:
-        Song* sort();
+        void sort(); // contains switch for determining what to sort by
+        void sortSongsByAlbum();
+        void sortSongsByName();
+        void sortSongsByArtist();
 
-        Sorter(int choice, string path);
+        void fileOutput();// outputs to file
+
+        Sorter(int choice, string path); // constructor
+
+        ~Sorter(){
+
+            delete playlist;
+            delete [] songs;
+    
+
+        }
+
     
 };
 
-Sorter::Sorter(int choice, string path)
-{
-    this->playlist = new Playlist(path);
 
-    if (choice >= 3) // decending
-    {
-        this->accending = 0;
-    } else { // accending
-        this->accending = 1;
-    };
-    this->sortby = choice;
-    
-    this->songs = (*this->playlist).getList();
-}
 
 
 

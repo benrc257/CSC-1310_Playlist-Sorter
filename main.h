@@ -17,12 +17,14 @@ using namespace std;
 #include <list>
 
 // Global Constants
-const string line = "---------------------------------------------";
-const string StorageInput = "Storage/Playlists";
-const string StorageOutput = "Storage/SortedPlaylists";
+const string LINE = "---------------------------------------------";
+const string StorageInput = "Storage";
+const string StorageOutput = "Storage";
 namespace fs = filesystem;
 
 // Driver Function Prototypes
-int printFileMenu(vector<string>);
+int fileMenu(vector<string>);
+int sortMenu();
+
 
 #endif

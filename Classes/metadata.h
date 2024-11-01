@@ -14,7 +14,19 @@ class Metadata { //this class will bundle metadata from the song into categories
         T data; //multiple of the same type of data can be held in one vector
     public:
         T getData(); //returns the data value
-        void setData(T); //intakes data value
+        void setData(T&); //intakes data value
 };
+
+template <typename T>
+T Metadata<T>::getData() { //returns the data vector without the value names
+    return this->data;
+}
+
+
+template <typename T>
+void Metadata<T>::setData(T& data) { //sets the data vector, name vector
+    this->data = data;
+}
+
 
 #endif

@@ -16,7 +16,8 @@ int main() {
     fs::path inputPath{StorageInput};
     fs::directory_entry directory(inputPath);
     fs::directory_iterator directoryIterator(inputPath);
-    int count = 0, choice;
+    int count = 0, fileIndex;
+    Sorter *sorter = NULL;
 
     // Adding filenames to the vector for menu
     if (directory.exists()) { // if StorageInput directory exists
@@ -35,20 +36,22 @@ int main() {
         return 0;
     }
     
-    choice = printFileMenu(filenames);
+    fileIndex = fileMenu(filenames);
     
-    if (choice == 0) {
+    if (fileIndex == 0) {
         cout << "Folder \"" << StorageInput << "\" is empty. Returning...";
         return 0;
     }
 
+    sorter = new Sorter(sortMenu(), filenames.at(fileIndex-1));
+    cout << "\nTEST driver.cpp line 47 ----- constructor ----\n"; // delete
+    sorter->sort();
+    sorter->fileOutput();
     
 
-    /* When creating the playlist object, use a try + catch statement. Playlist is set to throw an error into main if the file opening fails or if the file is empty. 
-    Print this error to the screen then tell the user the file is empty or unable to be opened.*/
-
-
-
-
+    
+    delete sorter;
+    
+    cout << "\nTEST driver.cpp line 55 ----- END ----\n"; // delete
     return 0;
 }

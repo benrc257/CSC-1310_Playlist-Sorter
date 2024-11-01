@@ -17,7 +17,10 @@ const string artists = "Artist Name(s)";
 struct Song {
     int size;
     Song *previous, *next;
-    Metadata<string> name, artist, album;
+    Metadata<string> name;
+    Metadata<string> artist;
+    Metadata<string> album;
+
 };
 
 // Class for holding the playlist data
@@ -26,7 +29,7 @@ class Playlist {
         Song* songs;
         string *filecontent;
         string **cells;
-        int rows, columns;
+        int rows = 0, columns = 0;
 
     public:
         int countColumns(string); //counts the number of commas in a string
@@ -37,8 +40,11 @@ class Playlist {
 
     //constructor
     Playlist(string path) {
+        cout << "\nTEST playlist.h line 42 ----- constructor ---- start";
         fillCells(path); //opens file and fills cells
+        cout << "\nTEST playlist.h line 45 ----- constructor ----";
         loadList(); //loads cells into list
+        cout << "\nTEST playlist.h line 47 ----- constructor ----";
     }
 
     //destructor

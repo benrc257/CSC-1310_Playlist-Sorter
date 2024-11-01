@@ -40,20 +40,20 @@ ${all}: ${objects}
 
 # Compile main
 ${driverout}: ${driver}
-	${CXX} ${CXXFLAGS} ${driver} -o {driverout}
+	${CXX} ${CXXFLAGS} ${driver} -o ${driverout}
 
 ${functionsout}: ${functions}
-	${CXX} ${CXXFLAGS} ${functions} -o {functionsout}
+	${CXX} ${CXXFLAGS} ${functions} -o ${functionsout}
 
 # Compile classes
 ${sorterout}: ${sorter}
-	${CXX} ${CXXFLAGS} ${sorter} -o {sorterout}
+	${CXX} ${CXXFLAGS} ${sorter} -o ${sorterout}
 
 ${playlistout}: ${playlist}
-	${CXX} ${CXXFLAGS} ${playlist} -o {playlistout}
+	${CXX} ${CXXFLAGS} ${playlist} -o ${playlistout}
 
 ${metadataout}: ${metadata}
-	${CXX} ${CXXFLAGS} ${sorter} -o {metadataout}
+	${CXX} ${CXXFLAGS} ${metadata} -o ${metadataout}
 
 # Make clean (Removes files)
 clean:
