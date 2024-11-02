@@ -46,7 +46,7 @@ class Playlist {
 
     //destructor
     ~Playlist() {
-        for (int i = 0; i < this->columns; i++) { //deletes columns
+        for (int i = 0; i < this->rows+1; i++) { //deletes columns
             delete [] cells[i];
         }
         delete [] cells; //deletes rows

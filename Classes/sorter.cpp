@@ -44,41 +44,40 @@ void Sorter::sort() {
 
 // bubble sort by Album
 void Sorter::sortSongsByAlbum() {
-    Song *temp1, *point1, *point2;
+    Song *temp1, *temp2, *point;
 
     int n = (this->songs)[0].size; // gets size of song arr
-    point1 = &songs[0];
-    for (int i = 0; i < n - 1; i++ ) { // bubble sort
-        point2 = point1->next;
+    for (int i = 1; i < n - 1; i++) { // bubble sort
+        point = songs[0].next;
         // Compare the song album of consecutive songs
         if (ascending) // seperates into accending 
         {
-            for (int j = 1; j < n - i - 1; j++) {
-                if (toupper(songs[j].album.getData()[1]) > toupper(songs[j + 1].album.getData()[1])) { // A-Z
+            for (int j = 0; j < n - i; j++) {
+                if (toupper(point->next->album.getData()[1]) > toupper(point->next->next->album.getData()[1])) { // A-Z
                
                     
                   // Swap if the current song name is lexicographically greater than the nex
-                   cout << LINE << "\n songs[j-1]" << songs[j-1].next->album.getData()
-                        << "\n songs[j]" << songs[j].next->album.getData()
-                        << "\n songs[j+1]" << songs[j+1].next->album.getData();
+                    //cout << "\n songs[j]" << point->next->album.getData()
+                    //     << "\n songs[j+1]" << point->next->next->album.getData();
 
-                   point2->next = point2->next->next;    
-                   point2->next->next = point2->next->next->next; 
-                   point2->next->next->next = point2->next;
+                    temp1 = point->next;
+                    temp2 = point->next->next;
+                    point = point->next;
+                    point->next = temp1;
+                    temp1 = temp2;
+
 
                 //    songs[j-1].next = &songs[j+1];     
                 //    songs[j].next = songs[j+1].next; 
                 //    songs[j+1].next = &songs[j];
                    
+                   //cout << "\n song[j] = " << point->next->album.getData();
                    
-                   cout  << "\n\n song[j-1] =   " << songs[j-1].next->album.getData();
-                   
-                   cout << "\n song[j] = " << songs[j].next->album.getData();
-                   
-                   cout << "\n song[j + 1] = " << songs[j+1].next->album.getData();
+                   //cout << "\n song[j + 1] = " << point->next->next->album.getData();
                 }
-                
-                point2 = point2->next;
+                point = point->next;
+                cout << "\n[" << j << "] " << point->album.getData();
+                //cout << "\n[" << j+1 << "] " << point->next->album.getData();
             }
         } else { 
             for (int j = n-1; j > i + 2; j--) {
@@ -163,11 +162,11 @@ void Sorter::fileOutput() { //outputs to file with linked list
     point = songs[0].next;
     for (int i = 1; i < songs[0].size; i++)
     {
+        point = point->next;
         temp = point->artist.getData() + ',' + point->name.getData() +','+ point->album.getData() + "\n" ;
         file << temp;
-        point = point->next;
     }
     
-    cout << LINE << LINE << "OUTPUTTING FILE" << LINE << LINE;
+    cout << LINE << LINE << "OUTPUTTING TO FILE" << LINE << LINE;
     file.close();
 }

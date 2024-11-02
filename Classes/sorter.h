@@ -29,8 +29,6 @@ class Sorter
         ~Sorter(){
 
             delete playlist;
-            delete [] songs;
-    
 
         }
 

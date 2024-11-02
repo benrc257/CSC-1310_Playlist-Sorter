@@ -77,7 +77,7 @@ void Playlist::loadList() {
 
 
     for (int i = 0; i < this->rows; i++) { 
-        (this->songs)[i].size = this->rows+1;
+        (this->songs)[i].size = this->rows;
         
         if (i == 0) { //handles first index, sets the previous and next for head to NULL
             (this->songs)[i].next = NULL;
