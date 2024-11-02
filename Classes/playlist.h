@@ -16,7 +16,7 @@ const string artists = "Artist Name(s)";
 // Structure for holding song data
 struct Song {
     int size;
-    Song *previous, *next;
+    Song *next;
     Metadata<string> name;
     Metadata<string> artist;
     Metadata<string> album;

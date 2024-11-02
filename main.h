@@ -15,9 +15,10 @@ using namespace std;
 #include <vector>
 #include <ctime>
 #include <list>
+#include <cctype>
 
 // Global Constants
-const string LINE = "---------------------------------------------";
+const string LINE = "\n---------------------------------------------\n";
 const string StorageInput = "Storage";
 const string StorageOutput = "Storage";
 namespace fs = filesystem;

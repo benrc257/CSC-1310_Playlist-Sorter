@@ -71,17 +71,17 @@ void Playlist::fillCells(string path) {
 }
 
 void Playlist::loadList() {
-    
-    this->songs = new Song[this->rows];
+    cout << "\n ---- Loading Playlist ----\n";
+        this->songs = new Song[this->rows+1];
+  
 
-    for (int i = 0; i < this->rows; i++) {
-        (this->songs)[i].size = this->rows;
+
+    for (int i = 0; i < this->rows; i++) { 
+        (this->songs)[i].size = this->rows+1;
         
         if (i == 0) { //handles first index, sets the previous and next for head to NULL
-            (this->songs)[i].previous = NULL;
             (this->songs)[i].next = NULL;
         } else { //handles all other indexes, sets next to NULL, sets previous to previous song's memory address, and previous song's next to current songs address 
-           (this->songs)[i].previous = &(this->songs)[i-1];
             (this->songs)[i].next = NULL;
             (this->songs)[i-1].next = &(this->songs)[i];
         }
@@ -91,7 +91,8 @@ void Playlist::loadList() {
         (this->songs)[i].artist.setData((this->cells)[i][3]);
         (this->songs)[i].album.setData((this->cells)[i][2]);
         (this->songs)[i].name.setData((this->cells)[i][1]);
-
+        
+        
     }
 } 
 

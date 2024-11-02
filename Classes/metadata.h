@@ -6,12 +6,11 @@
 #define METADATA_H
 
 #include "../main.h"
-#include <vector>
 
 template<typename T>
-class Metadata { //this class will bundle metadata from the song into categories
+class Metadata { //this class will hold metadata for each song
     private:
-        T data; //multiple of the same type of data can be held in one vector
+        T data;
     public:
         T getData(); //returns the data value
         void setData(T&); //intakes data value
@@ -27,6 +26,4 @@ template <typename T>
 void Metadata<T>::setData(T& data) { //sets the data vector, name vector
     this->data = data;
 }
-
-
 #endif

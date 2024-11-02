@@ -19,6 +19,11 @@ int main() {
     int count = 0, fileIndex;
     Sorter *sorter = NULL;
 
+    cout << LINE;
+    cout << "This program takes an unsorted playlist downloaded";
+    cout << "\nusing Exportify and sorts it according to user input.";
+    cout << LINE;
+
     // Adding filenames to the vector for menu
     if (directory.exists()) { // if StorageInput directory exists
         while (directoryIterator != fs::end(directoryIterator)) { // while the iterator has not reached the end of file
@@ -42,15 +47,13 @@ int main() {
         cout << "Folder \"" << StorageInput << "\" is empty. Returning...";
         return 0;
     }
-
-    sorter = new Sorter(sortMenu(), filenames.at(fileIndex-1));
-    sorter->sort();
-    sorter->fileOutput();
+    
+    sorter = new Sorter(sortMenu(), filenames.at(fileIndex-1)); //creates sorter object with input from the sorting menu and the file path
+    sorter->sort(); //sorts data
+    sorter->fileOutput(); // outputs to file
     
 
-    
+    cout << LINE << "Sorting Complete.\n";
     delete sorter;
-    
-  
     return 0;
 }
