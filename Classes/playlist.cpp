@@ -34,6 +34,7 @@ void Playlist::fillCells(string path) {
         getline(file, line);
         this->rows++;
     }
+    this->rows--;
     
     file.clear();
     file.seekg(0); //resets the read position back to the start
@@ -72,12 +73,12 @@ void Playlist::fillCells(string path) {
 
 void Playlist::loadList() {
     cout << "\n ---- Loading Playlist ----\n";
-        this->songs = new Song[this->rows+1];
+    this->songs = new Song[this->rows+1];
   
 
-
-    for (int i = 0; i < this->rows; i++) { 
-        (this->songs)[i].size = this->rows;
+    (this->songs)[0].size = this->rows+1;
+    for (int i = 1; i < this->rows+1; i++) { 
+        (this->songs)[i].size = this->rows+1;
         
         if (i == 0) { //handles first index, sets the previous and next for head to NULL
             (this->songs)[i].next = NULL;
@@ -88,9 +89,9 @@ void Playlist::loadList() {
 
 
         //transfers data from the cells vector into the linked list
-        (this->songs)[i].artist.setData((this->cells)[i][3]);
-        (this->songs)[i].album.setData((this->cells)[i][2]);
-        (this->songs)[i].name.setData((this->cells)[i][1]);
+        (this->songs)[i].artist.setData((this->cells)[i-1][3]);
+        (this->songs)[i].album.setData((this->cells)[i-1][2]);
+        (this->songs)[i].name.setData((this->cells)[i-1][1]);
         
         
     }
