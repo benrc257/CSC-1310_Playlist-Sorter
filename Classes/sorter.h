@@ -15,7 +15,7 @@ class Sorter
         int sortby; // what to sort by
         bool ascending; // true = ascending, false = descending
         Playlist* playlist; // the playlist to sort
-        Song* songs; // songs in said playlist
+
     public:
         void sort(); // contains switch for determining what to sort by
         void sortSongsByAlbum();

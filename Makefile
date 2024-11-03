@@ -10,8 +10,7 @@ functions := functions.cpp
 driver := driver.cpp
 sorter := Classes/sorter.cpp
 playlist := Classes/playlist.cpp
-metadata := Classes/metadata.cpp
-files := ${functions} ${driver} ${playlist} ${metadata} ${sorter}
+files := ${functions} ${driver} ${playlist} ${sorter}
 
 # object names
 output := PlaylistSorter
@@ -20,8 +19,7 @@ driverout := driver.o
 functionsout := functions.o
 sorterout := sorter.o
 playlistout := playlist.o
-metadataout := metadata.o
-objects := ${driverout} ${functionsout} ${sorterout} ${playlistout} ${metadataout}
+objects := ${driverout} ${functionsout} ${sorterout} ${playlistout}
 
 # Detect OS for clean
 ifdef OS
@@ -51,9 +49,6 @@ ${sorterout}: ${sorter}
 
 ${playlistout}: ${playlist}
 	${CXX} ${CXXFLAGS} ${playlist} -o ${playlistout}
-
-${metadataout}: ${metadata}
-	${CXX} ${CXXFLAGS} ${metadata} -o ${metadataout}
 
 # Make clean (Removes files)
 clean:

@@ -73,30 +73,60 @@ void Playlist::fillCells(string path) {
 
 void Playlist::loadList() {
     cout << "\n ---- Loading Playlist ----\n";
-    this->songs = new Song[this->rows+1];
+    this->songsize = this->rows+2; //sets size of linked list to rows+2 with space for head and tail
+    this->songs = new Song<string>[songsize]; //creates Song array
   
+    this->head = &songs[0]; //sets head node
+    this->tail = &songs[songsize-1]; //sets tail node
 
-    (this->songs)[0].size = this->rows+1;
-    for (int i = 1; i < this->rows+1; i++) { 
-        (this->songs)[i].size = this->rows+1;
+    songs[0].setNext(NULL); //sets head next to null
+    songs[0].setPrevious(NULL); //sets head previous to null
+    songs[songsize-1].setNext(NULL); //sets tail next to null
+    songs[songsize-1].setPrevious(NULL); //sets tail previous to null
+    
+
+    for (int i = 1; i < songsize-1; i++) { //runs after head node and until tail node
         
-        if (i == 0) { //handles first index, sets the previous and next for head to NULL
-            (this->songs)[i].next = NULL;
-        } else { //handles all other indexes, sets next to NULL, sets previous to previous song's memory address, and previous song's next to current songs address 
-            (this->songs)[i].next = NULL;
-            (this->songs)[i-1].next = &(this->songs)[i];
-        }
-
+        //sets previous song's next to current songs address, and current song's previous to previous song's address
+        songs[i-1].setNext(&songs[i]);
+        songs[i].setPrevious(&songs[i-1]);
 
         //transfers data from the cells vector into the linked list
-        (this->songs)[i].artist.setData((this->cells)[i-1][3]);
-        (this->songs)[i].album.setData((this->cells)[i-1][2]);
-        (this->songs)[i].name.setData((this->cells)[i-1][1]);
-        
+        songs[i].setArtist((this->cells)[i-1][3]);
+        (this->songs)[i].setAlbum((this->cells)[i-1][2]);
+        (this->songs)[i].setName((this->cells)[i-1][1]);
         
     }
-} 
 
-Song* Playlist::getList() {
-    return this->songs;
+}
+
+void insertAfter(Song<string>* node, Song<string>* before) { //first argument is the node to be placed, second argument is the node to place after
+    //variables
+    Song<string> *after;
+
+    after = before->getNext();
+
+    //places node between before and after
+    before->setNext(node);
+    after->setPrevious(node);
+
+    //sets node's pointers
+    node->setNext(after);
+    node->setNext(before);
+
+}
+
+Song<string>* pop(Song<string>* node) {
+    //variables
+    Song<string> *before, *after;
+
+    //saves the pointers before and after node
+    before = node->getPrevious();
+    after = node->getNext();
+
+    //bypasses node
+    before->setNext(after);
+    after->setPrevious(before);
+
+    return node;
 }

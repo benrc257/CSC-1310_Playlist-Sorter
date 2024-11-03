@@ -4,19 +4,18 @@
 
 #include "sorter.h"
 
-Sorter::Sorter(int choice, string path)
+Sorter::Sorter(int choice, string path) //constructor
 {
+    playlist = new Playlist(path);
     this->outpath = path;
-    this->playlist = new Playlist(path);
-    if (choice > 3) // decending
+    if (choice > 3) // Z-A
     {
         this->ascending = 0;
         choice = choice - 3;
-    } else { // ascending
+    } else { // A-Z
         this->ascending = 1;
     };
     this->sortby = choice;
-    this->songs = (*this->playlist).getList();
     cout << "\n\n ---- initializing sorter ----\n";
 };
 
@@ -42,12 +41,11 @@ void Sorter::sort() {
     
 };
 
-// bubble sort by Album
+// merge sort by Album
 void Sorter::sortSongsByAlbum() {
-    Song *temp1, *temp2, *point, *previous;
+    int n = playlist->songsize; // gets size of song arr
 
-    int n = (this->songs)[0].size-1; // gets size of song arr
-    for (int i = 0; i < n - 1; i++) { // bubble sort
+    for (int i = 0; i < n - 1; i++) { // merge sort
         previous = &songs[0]; //sets previous to be used as iterator
 
         // Compare the song album of consecutive songs
