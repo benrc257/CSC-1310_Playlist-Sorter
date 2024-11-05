@@ -17,7 +17,7 @@ Sorter::Sorter(int choice, string path) //constructor
         this->ascending = 1;
     };
     this->sortby = choice;
-    cout << "\n\n ---- initializing sorter ----\n";
+    cout << "\n\n ---- Initializing Sorter ----\n";
 };
 
 void Sorter::sort() {
@@ -26,12 +26,12 @@ void Sorter::sort() {
     {
         case 1: // name
             cout << LINE << "sorting by Name" << LINE;
-            //sortSongsByName();
+            sortSongsByName();
             break;
 
         case 2: // artist
             cout << LINE << "sorting by Artist" << LINE;
-            //sortSongsByArtist();
+            sortSongsByArtist();
             break;
             
         case 3: // album
@@ -42,186 +42,155 @@ void Sorter::sort() {
     
 };
 
-// merge sort by Album
-/*void Sorter::sortSongsByAlbum() {
-    int n = playlist->songsize; // gets size of song arr
-
-    for (int i = 0; i < n - 1; i++) { // merge sort
-        previous = &songs[0]; //sets previous to be used as iterator
-
-        // Compare the song album of consecutive songs
-        if (ascending) // seperates into accending 
-        {
-
-            for (int j = 0; j < n - i - 1; j++) {
-                point = previous->next; //sets point to the correct pointer for swapping
-                if (toupper(previous->next->album.getData()[1]) > toupper(point->next->album.getData()[1])) { // A-Z
-                    // Swap if the current song name is lexicographically greater than the nex
-
-                    //holding values
-                    temp1 = point->next->next;
-                    temp2 = point->next;
-
-                    //swapping values
-                    point->next->next = previous->next;
-                    point->next = temp1;
-                    previous->next = temp2;
-
-                }
-                previous = previous->next; //iterates to the next node
-            }
-        } else { 
-            for (int j = 0; j < n - i - 1; j++) {
-                point = previous->next; //sets point to the correct pointer for swapping
-                if (toupper(previous->next->album.getData()[1]) < toupper(point->next->album.getData()[1])) { // Z-A
-                    // Swap if the current song name is lexicographically greater than the nex
-
-                    //holding values
-                    temp1 = point->next->next;
-                    temp2 = point->next;
-
-                    //swapping values
-                    point->next->next = previous->next;
-                    point->next = temp1;
-                    previous->next = temp2;
-
-                }
-                previous = previous->next; //iterates to the next node
-            }
-        }
-    }
-}*/
-
+// Selection sort by album
 void Sorter::sortSongsByAlbum() {
     Song<string> *start, *iter1, *min;
 
-    start = playlist->head;
-    cout << "1\n";
-    for (int i = 0; i < playlist->songsize - 3; i++) { //runs until it reaches the second to last node
-        iter1 = start->getNext();
-        min = iter1;
-        cout << "2\n";
-        for (int j = 0; j < playlist->songsize - 3 - i; j++) { //runs until it reaches the end of the list from start
+    start = playlist->getHead();
+    
+    if (ascending) { //A-Z
+        for (int i = 0; i < playlist->getSongsize() - 3; i++) { //runs until it reaches the second to last node
+            iter1 = start->getNext();
+            min = start->getNext();
+
+            for (int j = 0; j < playlist->getSongsize() - 2 - i; j++) { //runs until it reaches the end of the list from start
+                
+
+                if (toupper(iter1->getAlbum()[1]) < toupper(min->getAlbum()[1])) { //compares current min to iterator
+                    min = iter1; //if iter is smaller, min = iter
+
+                }
+                iter1 = iter1->getNext(); //progresses iter
+            }
+
+            playlist->insertAfter(playlist->pop(min), start); //inserts min after the start node and removes min from the list
             
-            cout << "3\n";
-            if (toupper(iter1->getAlbum()[1]) > toupper(min->getAlbum()[1])) {
-                min = iter1;
-                cout << "MIN - " << min->getAlbum() << "\n";
-                cout << "4\n";
-            }
-            iter1 = iter1->getNext();
-        }
-        cout << "5\n";
-        playlist->insertAfter(min, start);
-        playlist->pop(min);
-        cout << "6\n";
-        start = start->getNext(); // progresses start
-    }
 
+            start = min; // progresses start
+        }
+    } else { //Z-A
+        for (int i = 0; i < playlist->getSongsize() - 3; i++) { //runs until it reaches the second to last node
+            iter1 = start->getNext();
+            min = start->getNext();
+
+            for (int j = 0; j < playlist->getSongsize() - 2 - i; j++) { //runs until it reaches the end of the list from start
+                
+
+                if (toupper(iter1->getAlbum()[1]) > toupper(min->getAlbum()[1])) { //compares current min to iterator
+                    min = iter1; //if iter is bigger, min = iter
+
+                }
+                iter1 = iter1->getNext(); //progresses iter
+            }
+
+            playlist->insertAfter(playlist->pop(min), start); //inserts min after the start node and removes min from the list
+            
+
+            start = min; // progresses start
+        }
+    }
 
 }
 
-// bubble sort by Artist
-/*void Sorter::sortSongsByArtist() {
-    Song *temp1, *temp2, *point, *previous;
+// Selection sort by artist
+void Sorter::sortSongsByArtist() {
+    Song<string> *start, *iter1, *min;
 
-    int n = (this->songs)[0].size-1; // gets size of song arr
-    for (int i = 0; i < n - 1; i++) { // bubble sort
-        previous = &songs[0]; //sets previous to be used as iterator
+    start = playlist->getHead();
+    
+    if (ascending) { //A-Z
+        for (int i = 0; i < playlist->getSongsize() - 3; i++) { //runs until it reaches the second to last node
+            iter1 = start->getNext();
+            min = start->getNext();
 
-        // Compare the song artist of consecutive songs
-        if (ascending) // seperates into accending 
-        {
+            for (int j = 0; j < playlist->getSongsize() - 2 - i; j++) { //runs until it reaches the end of the list from start
+                
 
-            for (int j = 0; j < n - i - 1; j++) {
-                point = previous->next; //sets point to the correct pointer for swapping
-                if (toupper(previous->next->artist.getData()[1]) > toupper(point->next->artist.getData()[1])) { // A-Z
-                    // Swap if the current song name is lexicographically greater than the nex
-
-                    //holding values
-                    temp1 = point->next->next;
-                    temp2 = point->next;
-
-                    //swapping values
-                    point->next->next = previous->next;
-                    point->next = temp1;
-                    previous->next = temp2;
+                if (toupper(iter1->getArtist()[1]) < toupper(min->getArtist()[1])) { //compares current min to iterator
+                    min = iter1; //if iter is smaller, min = iter
 
                 }
-                previous = previous->next; //iterates to the next node
+                iter1 = iter1->getNext(); //progresses iter
             }
-        } else { 
-            for (int j = 0; j < n - i - 1; j++) {
-                point = previous->next; //sets point to the correct pointer for swapping
-                if (toupper(previous->next->artist.getData()[1]) < toupper(point->next->artist.getData()[1])) { // Z-A
-                    // Swap if the current song name is lexicographically greater than the nex
 
-                    //holding values
-                    temp1 = point->next->next;
-                    temp2 = point->next;
+            playlist->insertAfter(playlist->pop(min), start); //inserts min after the start node and removes min from the list
+            
 
-                    //swapping values
-                    point->next->next = previous->next;
-                    point->next = temp1;
-                    previous->next = temp2;
+            start = min; // progresses start
+        }
+    } else { //Z-A
+        for (int i = 0; i < playlist->getSongsize() - 3; i++) { //runs until it reaches the second to last node
+            iter1 = start->getNext();
+            min = start->getNext();
+
+            for (int j = 0; j < playlist->getSongsize() - 2 - i; j++) { //runs until it reaches the end of the list from start
+                
+
+                if (toupper(iter1->getArtist()[1]) > toupper(min->getArtist()[1])) { //compares current min to iterator
+                    min = iter1; //if iter is bigger, min = iter
 
                 }
-                previous = previous->next; //iterates to the next node
+                iter1 = iter1->getNext(); //progresses iter
             }
+
+            playlist->insertAfter(playlist->pop(min), start); //inserts min after the start node and removes min from the list
+            
+
+            start = min; // progresses start
         }
     }
+
 }
 
-// bubble sort by name
+// Selection sort by name
 void Sorter::sortSongsByName() {
-    Song *temp1, *temp2, *point, *previous;
+    Song<string> *start, *iter1, *min;
 
-    int n = (this->songs)[0].size-1; // gets size of song arr
-    for (int i = 0; i < n - 1; i++) { // bubble sort
-        previous = &songs[0]; //sets previous to be used as iterator
+    start = playlist->getHead();
+    
+    if (ascending) { //A-Z
+        for (int i = 0; i < playlist->getSongsize() - 3; i++) { //runs until it reaches the second to last node
+            iter1 = start->getNext();
+            min = start->getNext();
 
-        // Compare the song name of consecutive songs
-        if (ascending) // seperates into accending 
-        {
+            for (int j = 0; j < playlist->getSongsize() - 2 - i; j++) { //runs until it reaches the end of the list from start
+                
 
-            for (int j = 0; j < n - i - 1; j++) {
-                point = previous->next; //sets point to the correct pointer for swapping
-                if (toupper(previous->next->name.getData()[1]) > toupper(point->next->name.getData()[1])) { // A-Z
-                    // Swap if the current song name is lexicographically greater than the nex
-
-                    //holding values
-                    temp1 = point->next->next;
-                    temp2 = point->next;
-
-                    //swapping values
-                    point->next->next = previous->next;
-                    point->next = temp1;
-                    previous->next = temp2;
+                if (toupper(iter1->getName()[1]) < toupper(min->getName()[1])) { //compares current min to iterator
+                    min = iter1; //if iter is smaller, min = iter
 
                 }
-                previous = previous->next; //iterates to the next node
+                iter1 = iter1->getNext(); //progresses iter
             }
-        } else { 
-            for (int j = 0; j < n - i - 1; j++) {
-                point = previous->next; //sets point to the correct pointer for swapping
-                if (toupper(previous->next->name.getData()[1]) < toupper(point->next->name.getData()[1])) { // Z-A
-                    // Swap if the current song name is lexicographically greater than the nex
 
-                    //holding values
-                    temp1 = point->next->next;
-                    temp2 = point->next;
+            playlist->insertAfter(playlist->pop(min), start); //inserts min after the start node and removes min from the list
+            
 
-                    //swapping values
-                    point->next->next = previous->next;
-                    point->next = temp1;
-                    previous->next = temp2;
+            start = min; // progresses start
+        }
+    } else { //Z-A
+        for (int i = 0; i < playlist->getSongsize() - 3; i++) { //runs until it reaches the second to last node
+            iter1 = start->getNext();
+            min = start->getNext();
+
+            for (int j = 0; j < playlist->getSongsize() - 2 - i; j++) { //runs until it reaches the end of the list from start
+                
+
+                if (toupper(iter1->getName()[1]) > toupper(min->getName()[1])) { //compares current min to iterator
+                    min = iter1; //if iter is bigger, min = iter
 
                 }
-                previous = previous->next; //iterates to the next node
+                iter1 = iter1->getNext(); //progresses iter
             }
+
+            playlist->insertAfter(playlist->pop(min), start); //inserts min after the start node and removes min from the list
+            
+
+            start = min; // progresses start
         }
     }
-}*/
+
+}
 
 void Sorter::fileOutput() { //outputs to file with linked list
     cout << LINE << "PREPARING FILE FOR OUTPUT" << LINE;
@@ -232,13 +201,13 @@ void Sorter::fileOutput() { //outputs to file with linked list
     
     file.open(this->outpath);
    
-    point = playlist->head;
-    cout << "\nsongsize: " << playlist->songsize;
-    for (int i = 1; i < playlist->songsize-2; i++)
+    point = playlist->getHead();
+    cout << "\nLIST SIZE: " << playlist->getSongsize()-2 << "\n";
+    for (int i = 1; i < playlist->getSongsize()-1; i++)
     {
         
         point = point->getNext();
-        cout << "\n7 " << i << " --- " << point;
+        cout << "\n" << i << " --- " << point;
         
         file << point;
     }

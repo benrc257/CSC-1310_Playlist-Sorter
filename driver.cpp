@@ -12,7 +12,7 @@
 int main() {
     // Variables
     vector<string> filenames;
-    string extension = ".csv", currentPath;
+    string extension = ".csv", outputExtension = ".output.csv", currentPath;
     fs::path inputPath{StorageInput};
     fs::directory_entry directory(inputPath);
     fs::directory_iterator directoryIterator(inputPath);
@@ -28,7 +28,7 @@ int main() {
     if (directory.exists()) { // if StorageInput directory exists
         while (directoryIterator != fs::end(directoryIterator)) { // while the iterator has not reached the end of file
             currentPath = directoryIterator->path().string();
-            if ((currentPath).substr(currentPath.length()-4) == extension) { //if the path ends in .csv
+            if ((currentPath).substr(currentPath.length()-4) == extension && (currentPath).find(outputExtension) == string::npos) { //if the path ends in .csv
                 filenames.push_back(currentPath); // add current path to the vector
                 cout << endl << filenames[count] << " found.\n";
                 count++; // increments count

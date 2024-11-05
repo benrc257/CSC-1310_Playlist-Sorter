@@ -32,12 +32,9 @@ class Playlist {
         void insertAfter(Song<string>*, Song<string>*); //inserts node after given node
         Song<string>* pop(Song<string>*); //pops node
 
-
-        //friends
-        friend class Sorter;
-        //friend void Sorter::sortSongsByArtist();
-        //friend void Sorter::sortSongsByAlbum();
-        //friend void Sorter::sortSongsByName();
+        //accessor functions
+        int getSongsize();
+        Song<string>* getHead();
         
 
         //constructor

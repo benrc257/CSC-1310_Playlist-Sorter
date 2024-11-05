@@ -83,18 +83,21 @@ void Playlist::loadList() {
     songs[0].setPrevious(NULL); //sets head previous to null
     songs[songsize-1].setNext(NULL); //sets tail next to null
     songs[songsize-1].setPrevious(NULL); //sets tail previous to null
-    
 
-    for (int i = 1; i < songsize-1; i++) { //runs after head node and until tail node
+    for (int i = 1; i < songsize; i++) { //runs after head node and until tail node
         
         //sets previous song's next to current songs address, and current song's previous to previous song's address
         songs[i-1].setNext(&songs[i]);
         songs[i].setPrevious(&songs[i-1]);
+        songs[i].setNext(NULL);
 
+        
         //transfers data from the cells vector into the linked list
-        songs[i].setArtist((this->cells)[i-1][3]);
-        (this->songs)[i].setAlbum((this->cells)[i-1][2]);
-        (this->songs)[i].setName((this->cells)[i-1][1]);
+        if (i != songsize-1) {
+            songs[i].setArtist((this->cells)[i-1][3]);
+            (this->songs)[i].setAlbum((this->cells)[i-1][2]);
+            (this->songs)[i].setName((this->cells)[i-1][1]);
+        }
         
     }
 
@@ -112,7 +115,7 @@ void Playlist::insertAfter(Song<string>* node, Song<string>* before) { //first a
 
     //sets node's pointers
     node->setNext(after);
-    node->setNext(before);
+    node->setPrevious(before);
 
 }
 
@@ -129,4 +132,12 @@ Song<string>* Playlist::pop(Song<string>* node) {
     after->setPrevious(before);
 
     return node;
+}
+
+int Playlist::getSongsize() {
+    return this->songsize;
+}
+
+Song<string>* Playlist::getHead() {
+    return this->head;
 }
