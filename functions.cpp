@@ -3,6 +3,7 @@
 */
 
 #include "main.h"
+#include "Classes/song.h"
 
 // handles the file selection menu and returns the index of the selected file
 int fileMenu(vector<string> files){ 
@@ -62,3 +63,5 @@ int sortMenu() {
     
     
 };
+
+

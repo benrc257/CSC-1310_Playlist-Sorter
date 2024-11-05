@@ -25,12 +25,12 @@ void Sorter::sort() {
     {
         case 1: // name
             cout << LINE << "sorting by Name" << LINE;
-            sortSongsByName();
+            //sortSongsByName();
             break;
 
         case 2: // artist
             cout << LINE << "sorting by Artist" << LINE;
-            sortSongsByArtist();
+            //sortSongsByArtist();
             break;
             
         case 3: // album
@@ -42,7 +42,7 @@ void Sorter::sort() {
 };
 
 // merge sort by Album
-void Sorter::sortSongsByAlbum() {
+/*void Sorter::sortSongsByAlbum() {
     int n = playlist->songsize; // gets size of song arr
 
     for (int i = 0; i < n - 1; i++) { // merge sort
@@ -89,10 +89,40 @@ void Sorter::sortSongsByAlbum() {
             }
         }
     }
+}*/
+
+void Sorter::sortSongsByAlbum() {
+    Song<string> *start, *iter1, *iter2, *min;
+
+    start = playlist->head;
+    cout << "1\n";
+    for (int i = 0; i < playlist->songsize - 3; i++) { //runs until it reaches the second to last node
+        iter1 = start;
+        cout << "2\n";
+        for (int j = 0; j < playlist->songsize - 3 - i; j++) { //runs until it reaches the end of the list from start
+            
+            cout << "3\n";
+            if (toupper(iter1->getNext()->getAlbum()[1]) > toupper(iter1->getNext()->getNext()->getAlbum()[1])) {
+                min = iter2;
+                cout << "4\n";
+            }
+            iter1 = iter1->getNext();
+        }
+        cout << "5\n";
+        min->getPrevious()->setNext(min->getNext()); //sets node before min to point to the node after min
+        min->getNext()->setPrevious(min->getPrevious()); //sets node after min to point to the node before min   
+        min->setNext(start->getNext()); //sets the node after min to the node after start
+        start->setNext(min); //sets the node after start to min
+        min->setPrevious(start); //sets the node before min to the start node
+        cout << "6\n";
+        start = min; // progresses start
+    }
+
+
 }
 
 // bubble sort by Artist
-void Sorter::sortSongsByArtist() {
+/*void Sorter::sortSongsByArtist() {
     Song *temp1, *temp2, *point, *previous;
 
     int n = (this->songs)[0].size-1; // gets size of song arr
@@ -191,24 +221,32 @@ void Sorter::sortSongsByName() {
             }
         }
     }
-}
+}*/
+
 void Sorter::fileOutput() { //outputs to file with linked list
     cout << LINE << "PREPARING FILE FOR OUTPUT" << LINE;
     ofstream file;
     string temp;
-    Song *point;
+    Song<string> *point;
     outpath = outpath.substr(0, outpath.size()-4) + ".output.csv";
     
     file.open(this->outpath);
    
-    point = &songs[0];
-    for (int i = 1; i < songs[0].size; i++)
+    point = playlist->head;
+    cout << "\nsongsize: " << playlist->songsize;
+    for (int i = 1; i < playlist->songsize-2; i++)
     {
-        point = point->next;
-        temp = point->artist.getData() + ',' + point->name.getData() +','+ point->album.getData() + "\n" ;
-        file << temp;
+        
+        point = point->getNext();
+        cout << "\n7 " << i << " --- " << point;
+        
+        file << point;
     }
     
     cout << LINE << LINE << "OUTPUTTING TO FILE" << LINE << LINE;
     file.close();
 }
+
+
+
+

@@ -14,13 +14,13 @@ class Sorter
         string outpath;
         int sortby; // what to sort by
         bool ascending; // true = ascending, false = descending
-        Playlist* playlist; // the playlist to sort
+        Playlist* playlist = NULL; // the playlist to sort
 
     public:
         void sort(); // contains switch for determining what to sort by
         void sortSongsByAlbum();
-        void sortSongsByName();
-        void sortSongsByArtist();
+        //void sortSongsByName();
+        //void sortSongsByArtist();
 
         void fileOutput();// outputs to file
 

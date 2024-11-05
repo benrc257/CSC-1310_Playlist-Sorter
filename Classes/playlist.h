@@ -13,9 +13,6 @@ const string track = "Track Name";
 const string album = "Album Name";
 const string artists = "Artist Name(s)";
 
-// Prototype for Sorter class to resolve visibility issues
-class Sorter;
-
 // Class for holding the playlist data
 class Playlist {
     private:
@@ -38,9 +35,10 @@ class Playlist {
 
         //friends
         friend class Sorter;
-        friend void Sorter::sortSongsByArtist();
-        friend void Sorter::sortSongsByAlbum();
-        friend void Sorter::sortSongsByName();
+        //friend void Sorter::sortSongsByArtist();
+        //friend void Sorter::sortSongsByAlbum();
+        //friend void Sorter::sortSongsByName();
+        
 
         //constructor
         Playlist(string path) {

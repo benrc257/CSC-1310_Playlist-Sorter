@@ -24,6 +24,12 @@ class Song { //this class will hold metadata for each song
         void setName(const T&); //sets the name value
         void setNext(Song*); //sets the next pointer
         void setPrevious(Song*); //gets the next pointer
+
+        //friends
+        friend std::ostream& operator<<(std::ostream& os, Song<string>* song) {
+            os << song->getArtist() + ',' + song->getName() +','+ song->getAlbum() + "\n" ;
+            return os;
+        }
 };
 
 template <typename T>
