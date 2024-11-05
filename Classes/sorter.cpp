@@ -3,6 +3,7 @@
 */
 
 #include "sorter.h"
+#include "playlist.h"
 
 Sorter::Sorter(int choice, string path) //constructor
 {
@@ -92,30 +93,29 @@ void Sorter::sort() {
 }*/
 
 void Sorter::sortSongsByAlbum() {
-    Song<string> *start, *iter1, *iter2, *min;
+    Song<string> *start, *iter1, *min;
 
     start = playlist->head;
     cout << "1\n";
     for (int i = 0; i < playlist->songsize - 3; i++) { //runs until it reaches the second to last node
-        iter1 = start;
+        iter1 = start->getNext();
+        min = iter1;
         cout << "2\n";
         for (int j = 0; j < playlist->songsize - 3 - i; j++) { //runs until it reaches the end of the list from start
             
             cout << "3\n";
-            if (toupper(iter1->getNext()->getAlbum()[1]) > toupper(iter1->getNext()->getNext()->getAlbum()[1])) {
-                min = iter2;
+            if (toupper(iter1->getAlbum()[1]) > toupper(min->getAlbum()[1])) {
+                min = iter1;
+                cout << "MIN - " << min->getAlbum() << "\n";
                 cout << "4\n";
             }
             iter1 = iter1->getNext();
         }
         cout << "5\n";
-        min->getPrevious()->setNext(min->getNext()); //sets node before min to point to the node after min
-        min->getNext()->setPrevious(min->getPrevious()); //sets node after min to point to the node before min   
-        min->setNext(start->getNext()); //sets the node after min to the node after start
-        start->setNext(min); //sets the node after start to min
-        min->setPrevious(start); //sets the node before min to the start node
+        playlist->insertAfter(min, start);
+        playlist->pop(min);
         cout << "6\n";
-        start = min; // progresses start
+        start = start->getNext(); // progresses start
     }
 
 

@@ -100,7 +100,7 @@ void Playlist::loadList() {
 
 }
 
-void insertAfter(Song<string>* node, Song<string>* before) { //first argument is the node to be placed, second argument is the node to place after
+void Playlist::insertAfter(Song<string>* node, Song<string>* before) { //first argument is the node to be placed, second argument is the node to place after
     //variables
     Song<string> *after;
 
@@ -116,7 +116,7 @@ void insertAfter(Song<string>* node, Song<string>* before) { //first argument is
 
 }
 
-Song<string>* pop(Song<string>* node) {
+Song<string>* Playlist::pop(Song<string>* node) {
     //variables
     Song<string> *before, *after;
 
